@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.models.Todo
 import kotlinx.android.synthetic.main.fragment_add_todo.*
+import kotlinx.coroutines.launch
 
 
 class AddTodoFragment : Fragment() {
@@ -27,8 +29,11 @@ class AddTodoFragment : Fragment() {
 
         add_button.setOnClickListener {
             val todo = Todo(todo_edit.text.toString(), System.currentTimeMillis())
-            viewModel.db.todoDao().insert(todo)
-            findNavController().popBackStack()
+
+            lifecycleScope.launch {
+                viewModel.db.todoDao().insert(todo)
+                findNavController().popBackStack()
+            }
         }
     }
 

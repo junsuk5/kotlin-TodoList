@@ -11,9 +11,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val db = Room.databaseBuilder(
         application,
         AppDatabase::class.java, "database-name"
-    ).allowMainThreadQueries().build()
+    ).build()
 
-    fun getAll() : LiveData<List<Todo>> {
+    fun getAll(): LiveData<List<Todo>> {
         return db.todoDao().getAll()
     }
 }
