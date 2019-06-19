@@ -4,8 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Todo(
-    @PrimaryKey(autoGenerate = true) val uid: Int,
+data class Todo(
     var todo: String,
     var time: Long
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var uid: Int? = null
+}
